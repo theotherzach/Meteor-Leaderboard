@@ -19,8 +19,7 @@ if (Meteor.is_client) {
  
 
   Template.leaderboard.sort_order = function () {
- // Passes a string back to the sort button based on the sort order.
-
+    // Passes a string back to the sort button based on the sort order.
     var order = "Score";
     if (Session.get("is_name_order")) {
       order = "Name";
@@ -33,6 +32,7 @@ if (Meteor.is_client) {
       Players.update(Session.get("selected_player"), {$inc: {score: 5}});
     },
     'click #sort': function () {
+      // Our button switch
       Session.set("is_name_order", !Session.get("is_name_order"));
     }
   };
@@ -44,6 +44,8 @@ if (Meteor.is_client) {
   };
 
   Template.leaderboard.players = function () {
+    // Ended up stealing this bit of code to get me started. 
+    // Here is where we actually change the sort.
     var order = Session.get("is_name_order") ?
     {name: 1, score: -1} :
     {score: -1, name: 1};
